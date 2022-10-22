@@ -3,3 +3,6 @@
   color: inherit;
   background: none;
 }
+.c-link {
+  cursor: pointer;
+}

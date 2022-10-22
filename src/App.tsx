@@ -11,7 +11,12 @@ const App = () => {
       <div className='row'>
         <div className='col-3 left-panel'>
           <FileSearch title='我的云文档' onFileSearch={() => {}} />
-          <FileList files={defaultFiles} />
+          <FileList
+            files={defaultFiles}
+            onFileClick={(id: string) => { console.log('click', id) }}
+            onFileDelete={(id: string) => { console.log('delete', id) }}
+            onSaveEdit={(id: string, value: string) => { console.log('edit', id, value) }}
+          />
         </div>
         <div className='col-9 bg-primary right-panel'>
           <h1>right part</h1>
