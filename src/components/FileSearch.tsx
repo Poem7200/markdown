@@ -32,7 +32,7 @@ const FileSearch: FC<FileSearchProps> = (props: FileSearchProps) => {
   }, [active])
   
   return (
-    <div className="alert alert-primary">
+    <div className="alert alert-primary mb-0">
       {
         !active &&
         <div className="d-flex justify-content-between align-items-center">
