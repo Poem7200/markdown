@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import useKeyPress from '../hooks/useKeyPress'
 
 interface FileSearchProps {
   title: string;
@@ -13,26 +14,17 @@ const FileSearch: FC<FileSearchProps> = (props: FileSearchProps) => {
   const [value, setValue] = useState('')
   let node = useRef(null)
   
-  const closeSearch = (e: KeyboardEvent) => {
-    e.preventDefault()
+  const enterPressed = useKeyPress(13)
+  const escPressed = useKeyPress(27)
+  
+  const closeSearch = () => {
     setActive(false)
     setValue('')
   }
   
   useEffect(() => {
-    const handleInputEvent = (e: KeyboardEvent) => {
-      const { keyCode } = e
-      if (keyCode === 13 && active) {
-        onFileSearch && onFileSearch(value)
-      }
-      else if (keyCode === 27 && active) {
-        closeSearch(e)
-      }
-    }
-    document.addEventListener('keyup', handleInputEvent)
-    return () => {
-      document.removeEventListener('keyup', handleInputEvent)
-    }
+    enterPressed && active && onFileSearch && onFileSearch(value)
+    escPressed && active && closeSearch()
   })
 
   useEffect(() => {
@@ -54,7 +46,7 @@ const FileSearch: FC<FileSearchProps> = (props: FileSearchProps) => {
         active &&
         <div className="d-flex justify-content-between align-items-center">
           <input className="form-control" ref={node} style={{ width: '300px' }} value={value} onChange={e => setValue(e.target.value)} />
-          <button className="icon-button" type="button" onClick={e => closeSearch(e as any)}>
+          <button className="icon-button" type="button" onClick={closeSearch}>
             <FontAwesomeIcon title='关闭' icon={faTimes} />
           </button>
         </div>

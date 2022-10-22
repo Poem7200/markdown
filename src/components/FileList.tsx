@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import useKeyPress from "../hooks/useKeyPress";
 import { FileItem } from '../utils/defaultFiles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -16,26 +17,17 @@ const FileList: FC<FileListProps> = (props: FileListProps) => {
   const [editItem, setEditItem] = useState(null as unknown as string)
   const [value, setValue] = useState('')
 
-  const closeSearch = (e: KeyboardEvent | MouseEvent) => {
-    e.preventDefault()
+  const enterPressed = useKeyPress(13)
+  const escPressed = useKeyPress(27)
+
+  const closeSearch = () => {
     setEditItem(null as unknown as string)
     setValue('')
   }
 
   useEffect(() => {
-    const handleInputEvent = (e: KeyboardEvent) => {
-      const { keyCode } = e
-      if (keyCode === 13 && editItem) {
-        onSaveEdit && onSaveEdit(editItem, value)
-      }
-      else if (keyCode === 27 && editItem) {
-        closeSearch(e)
-      }
-    }
-    document.addEventListener('keyup', handleInputEvent)
-    return () => {
-      document.removeEventListener('keyup', handleInputEvent)
-    }
+    enterPressed && editItem && onSaveEdit && onSaveEdit(editItem, value)
+    escPressed && editItem && closeSearch()
   })
 
   return (
@@ -62,9 +54,10 @@ const FileList: FC<FileListProps> = (props: FileListProps) => {
           }
           {
             file.id === editItem &&
+            // TODO: 自动focus
             <div className="d-flex justify-content-between align-items-center">
               <input className="form-control" style={{ width: '300px' }} value={value} onChange={e => setValue(e.target.value)} />
-              <button className="icon-button" type="button" onClick={e => closeSearch(e as unknown as MouseEvent)}>
+              <button className="icon-button" type="button" onClick={closeSearch}>
                 <FontAwesomeIcon title='关闭' icon={faTimes} />
               </button>
             </div>
