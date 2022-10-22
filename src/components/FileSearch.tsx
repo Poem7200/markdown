@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 interface FileSearchProps {
   title: string;
@@ -43,14 +45,18 @@ const FileSearch: FC<FileSearchProps> = (props: FileSearchProps) => {
         !active &&
         <div className="d-flex justify-content-between align-items-center">
           <span>{title}</span>
-          <button className="btn btn-primary" type="button" onClick={() => setActive(true)}>搜索</button>
+          <button className="icon-button" type="button" onClick={() => setActive(true)}>
+            <FontAwesomeIcon title='搜索' icon={faSearch} />
+          </button>
         </div>
       }
       {
         active &&
         <div className="d-flex justify-content-between align-items-center">
           <input className="form-control" ref={node} style={{ width: '300px' }} value={value} onChange={e => setValue(e.target.value)} />
-          <button className="btn btn-primary" type="button" onClick={e => closeSearch(e as any)}>关闭</button>
+          <button className="icon-button" type="button" onClick={e => closeSearch(e as any)}>
+            <FontAwesomeIcon title='关闭' icon={faTimes} />
+          </button>
         </div>
       }
     </div>

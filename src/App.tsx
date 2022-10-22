@@ -1,6 +1,7 @@
 import React from 'react';
 import FileSearch from './components/FileSearch';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 const App = () => {
   return (
