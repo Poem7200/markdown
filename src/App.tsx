@@ -1,5 +1,7 @@
 import React from 'react';
 import FileSearch from './components/FileSearch';
+import FileList from './components/FileList';
+import { defaultFiles } from './utils/defaultFiles';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -9,6 +11,7 @@ const App = () => {
       <div className='row'>
         <div className='col-3 left-panel'>
           <FileSearch title='我的云文档' onFileSearch={() => {}} />
+          <FileList files={defaultFiles} />
         </div>
         <div className='col-9 bg-primary right-panel'>
           <h1>right part</h1>
