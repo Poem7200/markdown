@@ -3,6 +3,7 @@ import { faPlus, faFileImport } from '@fortawesome/free-solid-svg-icons'
 import FileSearch from './components/FileSearch';
 import FileList from './components/FileList';
 import BottomButton from './components/BottomButton';
+import TabList from './components/TabList';
 import { defaultFiles } from './utils/defaultFiles';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
@@ -28,8 +29,8 @@ const App = () => {
             </div>
           </div>
         </div>
-        <div className='col-9 bg-primary right-panel'>
-          <h1>right part</h1>
+        <div className='col-9 right-panel'>
+          <TabList files={defaultFiles} onTabClick={(id) => console.log(id)} />
         </div>
       </div>
     </div>
