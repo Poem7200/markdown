@@ -4,9 +4,11 @@ import FileSearch from './components/FileSearch';
 import FileList from './components/FileList';
 import BottomButton from './components/BottomButton';
 import TabList from './components/TabList';
+import SimpleMDE from 'react-simplemde-editor';
 import { defaultFiles } from './utils/defaultFiles';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "easymde/dist/easymde.min.css"
+import './App.css';
 
 const App = () => {
   return (
@@ -31,6 +33,7 @@ const App = () => {
         </div>
         <div className='col-9 right-panel'>
           <TabList files={defaultFiles} onTabClick={(id) => console.log(id)} />
+          <SimpleMDE value={defaultFiles[1].body} onChange={val => console.log(val)} />
         </div>
       </div>
     </div>

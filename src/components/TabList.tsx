@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import './TabList.scss'
 
 interface TabListProps {
   files: {
@@ -32,7 +33,7 @@ const TabList: FC<TabListProps> = (props: TabListProps) => {
           <li className="nav-item" key={file.id}>
             <a href="#" className={fileItemClasses} onClick={() => handleClick(file.id)}>
               {file.title}
-              <span className="ml-2">
+              <span className="ml-2 close-icon">
                 <FontAwesomeIcon title='关闭' icon={faTimes} />
               </span>
             </a>
@@ -44,6 +45,7 @@ const TabList: FC<TabListProps> = (props: TabListProps) => {
 }
 
 TabList.defaultProps = {
+  activeId: '1',
   unsavedIds: []
 }
 

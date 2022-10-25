@@ -15,7 +15,7 @@ export const defaultFiles: FileItem[] = [
   {
     id: '2',
     title: 'title 2',
-    body: 'this is body 2',
+    body: '## this is body 2',
     createdAt: 1695102358
   },
   {
